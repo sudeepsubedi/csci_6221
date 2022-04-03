@@ -1,7 +1,10 @@
 package com.example.timetableapp
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 
 //import com.example.timetableapp.MyClass as MyClass1
 
@@ -16,6 +19,23 @@ class MainActivity : AppCompatActivity()
         addClasses()
         printClassInfo()
 
+        //When a button is clicked: These steps happen
+        //Step 1: Get reference to the button
+        val btnMon1 = findViewById<Button>(R.id.mon1)
+        //Step 2: Call the clickHandlerFunction
+        btnMon1.setOnClickListener { clickHandlerFunction(it) }
+    }
+
+    //This clickHandler handles the onClick functionality for the buttons
+    private fun clickHandlerFunction(viewThatIsClicked: View)
+    {
+        val btn = findViewById<Button>(R.id.mon1)
+        btn.text = classList[0].csciName  + "\n" +classList[0].classTime
+        val size = btn.textSize
+        btn.setTextSize(size-53)
+        val grayColorValue = Color.GRAY
+        btn.setBackgroundColor(grayColorValue)
+        //1. Display the screen for dropdown menu
     }
 
     fun addClasses()
