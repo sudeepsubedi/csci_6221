@@ -81,6 +81,5 @@ class MainActivity : AppCompatActivity()
         for (myClass in classList) {
             myClass.printInfo()
         }
-        val x = 2
     }
 }
