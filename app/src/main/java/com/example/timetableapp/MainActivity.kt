@@ -24,11 +24,13 @@ class MainActivity : AppCompatActivity()
         addClasses()
         printClassInfo()
 
-        //When a button is clicked: These steps happen
-        //Step 1: Get reference to the button
-        val btnMon1 = binding.mon1
-        //Step 2: Call the clickHandlerFunction
-        btnMon1.setOnClickListener { clickHandlerFunction(btnMon1) }
+        //uncomment these lines
+
+//        //When a button is clicked: These steps happen
+//        //Step 1: Get reference to the button
+//        val btnMon1 = binding.mon1
+//        //Step 2: Call the clickHandlerFunction
+//        btnMon1.setOnClickListener { clickHandlerFunction(btnMon1) }
     }
 
     //This clickHandler handles the onClick functionality for the buttons
