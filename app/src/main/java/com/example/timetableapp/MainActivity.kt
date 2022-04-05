@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity()
         //setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        addClasses()
-        printClassInfo()
+//        addClasses()
+//        printClassInfo()
 
         //uncomment these lines
 
@@ -109,4 +109,6 @@ class MainActivity : AppCompatActivity()
             myClass.printInfo()
         }
     }
+
+
 }
