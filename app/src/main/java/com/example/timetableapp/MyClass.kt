@@ -9,7 +9,8 @@ class MyClass(
     val _professorInfo:String,
     val _classLocation:String,
     val _classDay:String,
-    val _classTime:String
+    val _startTime:String,
+    val _endTime:String
 )
 {
     var csciName:String = _csciName
@@ -18,7 +19,8 @@ class MyClass(
     var professorInfo:String = _professorInfo
     var classLocation:String = _classLocation
     var day:String = _classDay
-    var classTime:String = _classTime
+    var startTime:String = _startTime
+    var endTime:String =_endTime
 
     init
     {
@@ -34,7 +36,8 @@ class MyClass(
         println("ProfessorInfo: $professorInfo")
         println("Class Location: $classLocation")
         println("Day: $day")
-        println("Class Time: $classTime")
+        println("Class startTime: $startTime")
+        println("Class endTime: $endTime")
         println()
         println("==============")
     }
