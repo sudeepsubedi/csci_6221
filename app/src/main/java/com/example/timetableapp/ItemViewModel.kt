@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class ItemViewModel:ViewModel() {
+    val className:String = "CSCI 1212"
     private val mutabaleSelectedItem = MutableLiveData<String>()
     var classList:MutableList<MyClass> = mutableListOf<MyClass>()
 

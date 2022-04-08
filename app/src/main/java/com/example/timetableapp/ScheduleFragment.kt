@@ -1,6 +1,7 @@
 package com.example.timetableapp
 
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -22,8 +23,10 @@ import com.example.timetableapp.databinding.FragmentScheduleBinding
 class ScheduleFragment : Fragment() {
 
     //reference to the ItemViewModel
+
     private lateinit var  viewModel: ItemViewModel
     lateinit var binding: FragmentScheduleBinding
+    private var viewModelCounter:Int = 0;
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
 //        arguments?.let {
@@ -39,24 +42,27 @@ class ScheduleFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
-
+        Log.i("ShceduleFragment","Schedule Fragment is called")
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate<FragmentScheduleBinding>(inflater,
             R.layout.fragment_schedule,container,false)
 
-        //** For ViewModel**//
-        Log.i("ScheduleFragment", "Called ViewModelProvider.get")
-        viewModel = ViewModelProvider(this).get(ItemViewModel::class.java)
+        if(viewModelCounter == 0)
+        {
+            //** For ViewModel**//
+            Log.i("ScheduleFragment", "Called ViewModelProvider.get")
+            viewModel = ViewModelProvider(this).get(ItemViewModel::class.java)
+            viewModelCounter++
+        }
+
 
         //When a button is clicked: These steps happen
         //Step 1: Get reference to the button
         val btnMon1 = binding.mon1
         //Step 2: Call the clickHandlerFunction
         btnMon1.setOnClickListener{view : View ->
-            clickHandlerFunction(view)
-            //view.findNavController().navigate(R.id.action_scheduleFragment_to_addFragment)
+            clickHandlerFunction(view,btnMon1)
+
         }
 
         //Logic for ViewModel
@@ -65,9 +71,17 @@ class ScheduleFragment : Fragment() {
         //return inflater.inflate(R.layout.placeholder_layout, container, false)
     }
 
-    private fun clickHandlerFunction( view:View)
+    /**
+     * Method for handling button click handlers
+     */
+    private fun clickHandlerFunction( view:View, btn:Button)
     {
-        view.findNavController().navigate(R.id.action_scheduleFragment_to_addFragment)
+        val currentScore = 10
+        val action = ScheduleFragmentDirections.actionScheduleFragmentToAddFragment(10)
+
+
+        //view.findNavController().navigate(R.id.action_scheduleFragment_to_addFragment)
+        view.findNavController().navigate(action)
     }
 
     //This clickHandler handles the onClick functionality for the buttons
