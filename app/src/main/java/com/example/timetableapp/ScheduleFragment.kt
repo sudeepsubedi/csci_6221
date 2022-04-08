@@ -2,31 +2,27 @@ package com.example.timetableapp
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 
 import com.example.timetableapp.databinding.FragmentScheduleBinding
 
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ScheduleFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ScheduleFragment : Fragment() {
 
-
+    //reference to the ItemViewModel
+    private lateinit var  viewModel: ItemViewModel
     lateinit var binding: FragmentScheduleBinding
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
@@ -51,6 +47,10 @@ class ScheduleFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentScheduleBinding>(inflater,
             R.layout.fragment_schedule,container,false)
 
+        //** For ViewModel**//
+        Log.i("ScheduleFragment", "Called ViewModelProvider.get")
+        viewModel = ViewModelProvider(this).get(ItemViewModel::class.java)
+
         //When a button is clicked: These steps happen
         //Step 1: Get reference to the button
         val btnMon1 = binding.mon1
@@ -59,6 +59,9 @@ class ScheduleFragment : Fragment() {
             clickHandlerFunction(view)
             //view.findNavController().navigate(R.id.action_scheduleFragment_to_addFragment)
         }
+
+        //Logic for ViewModel
+        //val dataReceived = viewModel!!.selectedItem.value
         return binding.root
         //return inflater.inflate(R.layout.placeholder_layout, container, false)
     }

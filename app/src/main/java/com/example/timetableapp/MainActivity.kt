@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.timetableapp.databinding.ActivityMainBinding
 
 //import com.example.timetableapp.MyClass as MyClass1
@@ -20,6 +22,9 @@ class MainActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+//        val navController = this.findNavController(R.id.myNavHostFragment)
+//        NavigationUI.setupActionBarWithNavController(this,navController)
+
 
 //        addClasses()
 //        printClassInfo()
@@ -31,6 +36,14 @@ class MainActivity : AppCompatActivity()
 //        val btnMon1 = binding.mon1
 //        //Step 2: Call the clickHandlerFunction
 //        btnMon1.setOnClickListener { clickHandlerFunction(btnMon1) }
+    }
+
+    /**
+     * This is for adding the back button
+     */
+    override fun onSupportNavigateUp():Boolean{
+        val navController = this.findNavController(R.id.myNavHostFragment)
+        return navController.navigateUp()
     }
 
     //This clickHandler handles the onClick functionality for the buttons
