@@ -1,6 +1,7 @@
 package com.example.timetableapp
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,6 +14,8 @@ class ItemViewModel:ViewModel() {
     //Buttons clicked are put in this list
     var chosenClasses:MutableList<String> = mutableListOf<String>()
     var chosenClassObjects:MutableList<MyClass> = mutableListOf<MyClass>()
+
+    var addSuccess:Boolean = true
 
 
     fun setData(item:String)
@@ -114,9 +117,36 @@ class ItemViewModel:ViewModel() {
             val myClassName = myClass.csciName
             if(myClassName==(csci))
             {
-                chosenClassObjects.add(myClass)
+                val conflictResult:Boolean = timeConflicts(myClass)
+                //make sure that it doesn't conflict with another class already added
+                if(conflictResult)
+                {
+                    addSuccess = false
+                }
+
+                else
+                {
+                    chosenClassObjects.add(myClass)
+                }
+
             }
         }
+    }
+
+    /**
+     * This function checks if the time conflicts for the class
+     */
+    fun timeConflicts(myClass:MyClass):Boolean
+    {
+        var result:Boolean = false
+        for(item in chosenClassObjects)
+        {
+            if(item.day== myClass.day && (item.startTime==myClass.startTime && item.endTime==myClass.endTime))
+            {
+                result = true
+            }
+        }
+        return result
     }
 
 

@@ -49,102 +49,226 @@ class ScheduleFragment : Fragment() {
             R.layout.fragment_schedule,container,false)
 
         //update this fragment's content
-        var size = 0
-        for(item in viewModel.chosenClassObjects)
+        val size = viewModel.chosenClassObjects.size
+        if(size > 0)
         {
-            Log.i("ScheduleFragment","${item.csciName}")
-            size++
-            var startTime:Int = item.startTime.toInt()
-            var endTime:Int = item.endTime.toInt()
-            var day:String = item.day.toLowerCase()
-            if(day == "wednesday")
+            for(item in viewModel.chosenClassObjects)
             {
+                displayInfo(item)
+                /**
+                var startTime:Int = item.startTime.toInt()
+                var endTime:Int = item.endTime.toInt()
+                var day:String = item.day.toLowerCase()
+                Log.i("ScheduleFragment","${item.csciName}")
+
+
+                if(day == "wednesday")
+                {
                 //val btnMon1 = binding.wed1
                 lateinit var btn: Button
                 if(startTime < 1200)
                 {
-                    //btn 1
-                    btn = binding.mon1
+                //btn 1
+                btn = binding.mon1
                 }
 
                 else if(startTime>=1200 && endTime< 1600)
                 {
-                    //btn2
-                    btn = binding.mon2
+                //btn2
+                btn = binding.mon2
                 }
 
                 else
                 {
-                    //btn3
-                    btn = binding.mon3
+                //btn3
+                btn = binding.mon3
                 }
                 btn.text = item.csciName + "\n" + item.startTime + ":"+item.endTime
                 btn.setBackgroundColor(Color.LTGRAY)
-            }
+                }
 
-            else if(day == "friday")
-            {
+                else if(day == "friday")
+                {
                 lateinit var btn: Button
                 if(startTime < 1200)
                 {
-                    //btn 1
-                    btn = binding.fri1
+                //btn 1
+                btn = binding.fri1
                 }
 
                 else if(startTime>=1200 && endTime< 1600)
                 {
-                    //btn2
-                    btn = binding.fri2
+                //btn2
+                btn = binding.fri2
                 }
 
                 else
                 {
-                    //btn3
-                    btn = binding.fri3
+                //btn3
+                btn = binding.fri3
                 }
 
                 btn.text = item.csciName + "\n" + item.startTime + ":" + item.endTime
                 btn.setBackgroundColor(Color.LTGRAY)
+                }
+                 */
+
             }
         }
+
         Log.i("ScheduleFragment","Size is: $size")
-
-        /**
-         * if(viewModelCounter == 0)
-        {
-        //** For ViewModel**//
-        Log.i("ScheduleFragment", "Called ViewModelProvider.get")
-        //viewModel = ViewModelProvider(this).get(ItemViewModel::class.java)
-        viewModelCounter++
-        }
-
-
-        //When a button is clicked: These steps happen
-        //Step 1: Get reference to the button
-        val btnMon1 = binding.mon1
-        val myClass = viewModel.className
-        Log.i("ScheduleFragment", "Class Name: $myClass")
-        //btnMon1.text = viewModel.className
-
-        //Step 2: Call the clickHandlerFunction
-        btnMon1.setOnClickListener{view : View ->
-        clickHandlerFunction(view,btnMon1)
-        btnMon1.text = viewModel.className
-        }
-
-        val btnMon2 = binding.mon2
-        btnMon2.setOnClickListener { view:View->
-        clickHandlerFunction(view,btnMon2)
-        }
-
-
-         */
-
-        //Logic for ViewModel
-        //val dataReceived = viewModel!!.selectedItem.value
         return binding.root
-        //return inflater.inflate(R.layout.placeholder_layout, container, false)
+
     }
+
+    private fun displayInfo(item:MyClass)
+    {
+        var startTime:Int = item.startTime.toInt()
+        var endTime:Int = item.endTime.toInt()
+        var day:String = item.day.toLowerCase()
+        //val btnMon1 = binding.wed1
+        lateinit var btn: Button
+
+        if(day == "monday")
+        {
+
+            if(startTime < 1200)
+            {
+                //btn 1
+                btn = binding.mon1
+            }
+
+            else if(startTime>=1200 && endTime< 1600)
+            {
+                //btn2
+                btn = binding.mon2
+            }
+
+            else if(startTime>=1600 && endTime <2100)
+            {
+                //btn3
+                btn = binding.mon3
+            }
+
+            else
+            {
+                btn = binding.mon4
+            }
+
+        }
+
+        else if(day == "tuesday")
+        {
+
+            if(startTime < 1200)
+            {
+                //btn 1
+                btn = binding.tue1
+            }
+
+            else if(startTime>=1200 && endTime< 1600)
+            {
+                //btn2
+                btn = binding.tue2
+            }
+
+            else if(startTime>=1600 && endTime <2100)
+            {
+                //btn3
+                btn = binding.tue3
+            }
+
+            else
+            {
+                btn = binding.tue4
+            }
+
+        }
+
+        else if(day == "wednesday")
+        {
+
+            if(startTime < 1200)
+            {
+                //btn 1
+                btn = binding.wed1
+            }
+
+            else if(startTime>=1200 && endTime< 1600)
+            {
+                //btn2
+                btn = binding.wed2
+            }
+
+            else if(startTime>=1600 && endTime <2100)
+            {
+                //btn3
+                btn = binding.wed3
+            }
+
+            else
+            {
+                btn = binding.wed4
+            }
+
+        }
+
+        else if(day == "thursday")
+        {
+
+            if(startTime < 1200)
+            {
+                //btn 1
+                btn = binding.thu1
+            }
+
+            else if(startTime>=1200 && endTime< 1600)
+            {
+                //btn2
+                btn = binding.thu2
+            }
+
+            else if(startTime>=1600 && endTime <2100)
+            {
+                //btn3
+                btn = binding.thu3
+            }
+
+            else
+            {
+                btn = binding.thu4
+            }
+
+        }
+
+        else //if(day == "friday")
+        {
+
+            if(startTime < 1200)
+            {
+                //btn 1
+                btn = binding.fri1
+            }
+
+            else if(startTime>=1200 && endTime< 1600)
+            {
+                //btn2
+                btn = binding.fri2
+            }
+
+            else
+            {
+                //btn3
+                btn = binding.fri3
+            }
+
+
+        }
+        btn.text = item.csciName + "\n" + item.startTime + ":" + item.endTime
+        btn.setBackgroundColor(Color.LTGRAY)
+    }
+
+
 
     /**
      * Method for handling button click handlers
@@ -159,42 +283,5 @@ class ScheduleFragment : Fragment() {
         //view.findNavController().navigate(R.id.action_scheduleFragment_to_addFragment)
         view.findNavController().navigate(action)
     }
-
-    //This clickHandler handles the onClick functionality for the buttons
-//    private fun clickHandlerFunction(btn: Button)
-//    {
-//
-//        val btn = findViewById<Button>(R.id.mon1)
-//        btn.text = classList[0].csciName  + "\n" +classList[0].classTime
-//        val size = btn.textSize
-//        btn.setTextSize(size-53)
-//        val grayColorValue = Color.GRAY
-//        btn.setBackgroundColor(grayColorValue)
-//
-//        1. Display the screen for dropdown menu/Add Fragment
-//        view = view.findNavController().navigate(R.id.action_scheduleFragment_to_addFragment)
-//
-//    }
-
-//    companion object {
-//        /**
-//         * Use this factory method to create a new instance of
-//         * this fragment using the provided parameters.
-//         *
-//         * @param param1 Parameter 1.
-//         * @param param2 Parameter 2.
-//         * @return A new instance of fragment ScheduleFragment.
-//         */
-//        // TODO: Rename and change types and number of parameters
-//        @JvmStatic
-//        fun newInstance(param1: String, param2: String) =
-//            ScheduleFragment().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-//                }
-//            }
-//    }
-
 
 }
