@@ -6,9 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class ItemViewModel:ViewModel() {
-    val className:String = "CSCI 1212"
+    var className:String = ""
+    var addedClassName:String = ""
     private val mutabaleSelectedItem = MutableLiveData<String>()
     var classList:MutableList<MyClass> = mutableListOf<MyClass>()
+    //Buttons clicked are put in this list
+    var chosenClasses:MutableList<String> = mutableListOf<String>()
+    var chosenClassObjects:MutableList<MyClass> = mutableListOf<MyClass>()
+
 
     fun setData(item:String)
     {
@@ -20,8 +25,8 @@ class ItemViewModel:ViewModel() {
     init
     {
         Log.i("ItemViewModel", "ItemViewModel created")
-        addClasses()
-        printClassInfo()
+        //addClasses()
+        //printClassInfo()
     }
 
     override fun onCleared() {
@@ -96,6 +101,21 @@ class ItemViewModel:ViewModel() {
     {
         for (myClass in classList) {
             myClass.printInfo()
+        }
+    }
+
+    /**
+     * This function adds the class into the list of objects
+     */
+    fun addToChosenObjects(csci:String)
+    {
+        for(myClass in classList)
+        {
+            val myClassName = myClass.csciName
+            if(myClassName==(csci))
+            {
+                chosenClassObjects.add(myClass)
+            }
         }
     }
 

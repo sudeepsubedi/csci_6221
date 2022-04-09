@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.timetableapp.databinding.ActivityMainBinding
@@ -14,7 +15,7 @@ import com.example.timetableapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity()
 {
-    //private lateinit var binding:ActivityMainBinding
+    private lateinit var viewModel: ItemViewModel
     private lateinit var binding: ActivityMainBinding
     var classList:MutableList<MyClass> = mutableListOf<MyClass>()
     override fun onCreate(savedInstanceState: Bundle?)
@@ -22,6 +23,9 @@ class MainActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        viewModel = ViewModelProvider(this).get(ItemViewModel::class.java)
+        viewModel.addClasses()
+        viewModel.printClassInfo()
 //        val navController = this.findNavController(R.id.myNavHostFragment)
 //        NavigationUI.setupActionBarWithNavController(this,navController)
 

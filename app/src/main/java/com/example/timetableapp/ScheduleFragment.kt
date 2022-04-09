@@ -10,23 +10,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
 
 import com.example.timetableapp.databinding.FragmentScheduleBinding
 
 
-
-
 class ScheduleFragment : Fragment() {
 
     //reference to the ItemViewModel
-
-    private lateinit var  viewModel: ItemViewModel
+    private  val  viewModel: ItemViewModel by activityViewModels()
+//    private lateinit var  viewModel: ItemViewModel
     lateinit var binding: FragmentScheduleBinding
     private var viewModelCounter:Int = 0;
+    val args:ScheduleFragmentArgs by navArgs()
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
 //        arguments?.let {
@@ -47,23 +48,97 @@ class ScheduleFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentScheduleBinding>(inflater,
             R.layout.fragment_schedule,container,false)
 
-        if(viewModelCounter == 0)
+        //update this fragment's content
+        var size = 0
+        for(item in viewModel.chosenClassObjects)
         {
-            //** For ViewModel**//
-            Log.i("ScheduleFragment", "Called ViewModelProvider.get")
-            viewModel = ViewModelProvider(this).get(ItemViewModel::class.java)
-            viewModelCounter++
+            Log.i("ScheduleFragment","${item.csciName}")
+            size++
+            var startTime:Int = item.startTime.toInt()
+            var endTime:Int = item.endTime.toInt()
+            var day:String = item.day.toLowerCase()
+            if(day == "wednesday")
+            {
+                //val btnMon1 = binding.wed1
+                lateinit var btn: Button
+                if(startTime < 1200)
+                {
+                    //btn 1
+                    btn = binding.mon1
+                }
+
+                else if(startTime>=1200 && endTime< 1600)
+                {
+                    //btn2
+                    btn = binding.mon2
+                }
+
+                else
+                {
+                    //btn3
+                    btn = binding.mon3
+                }
+                btn.text = item.csciName + "\n" + item.startTime + ":"+item.endTime
+                btn.setBackgroundColor(Color.LTGRAY)
+            }
+
+            else if(day == "friday")
+            {
+                lateinit var btn: Button
+                if(startTime < 1200)
+                {
+                    //btn 1
+                    btn = binding.fri1
+                }
+
+                else if(startTime>=1200 && endTime< 1600)
+                {
+                    //btn2
+                    btn = binding.fri2
+                }
+
+                else
+                {
+                    //btn3
+                    btn = binding.fri3
+                }
+
+                btn.text = item.csciName + "\n" + item.startTime + ":" + item.endTime
+                btn.setBackgroundColor(Color.LTGRAY)
+            }
+        }
+        Log.i("ScheduleFragment","Size is: $size")
+
+        /**
+         * if(viewModelCounter == 0)
+        {
+        //** For ViewModel**//
+        Log.i("ScheduleFragment", "Called ViewModelProvider.get")
+        //viewModel = ViewModelProvider(this).get(ItemViewModel::class.java)
+        viewModelCounter++
         }
 
 
         //When a button is clicked: These steps happen
         //Step 1: Get reference to the button
         val btnMon1 = binding.mon1
+        val myClass = viewModel.className
+        Log.i("ScheduleFragment", "Class Name: $myClass")
+        //btnMon1.text = viewModel.className
+
         //Step 2: Call the clickHandlerFunction
         btnMon1.setOnClickListener{view : View ->
-            clickHandlerFunction(view,btnMon1)
-
+        clickHandlerFunction(view,btnMon1)
+        btnMon1.text = viewModel.className
         }
+
+        val btnMon2 = binding.mon2
+        btnMon2.setOnClickListener { view:View->
+        clickHandlerFunction(view,btnMon2)
+        }
+
+
+         */
 
         //Logic for ViewModel
         //val dataReceived = viewModel!!.selectedItem.value
@@ -76,8 +151,9 @@ class ScheduleFragment : Fragment() {
      */
     private fun clickHandlerFunction( view:View, btn:Button)
     {
-        val currentScore = 10
-        val action = ScheduleFragmentDirections.actionScheduleFragmentToAddFragment(10)
+
+        val addedClassName = viewModel.className
+        val action = ScheduleFragmentDirections.actionScheduleFragmentToAddFragment(addedClassName)
 
 
         //view.findNavController().navigate(R.id.action_scheduleFragment_to_addFragment)

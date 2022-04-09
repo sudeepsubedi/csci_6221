@@ -95,6 +95,7 @@
 
                 <Button
                     android:id="@+id/mon1"
+                    android:name = "mon1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
