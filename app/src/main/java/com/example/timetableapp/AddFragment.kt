@@ -48,6 +48,7 @@ class AddFragment: Fragment() {
         val class4Btn = binding.class4
         val class5Btn = binding.class5
         val doneBtn = binding.doneButton
+        val removeBtn = binding.removeButton
 
 
         //Step 2: Call the clickHandlerFunction
@@ -96,6 +97,11 @@ class AddFragment: Fragment() {
                 clickHandlerFunction(view,doneBtn)
         }
 
+        removeBtn.setOnClickListener{view : View ->
+            //Navigate to the timetable
+            clickHandlerFunction(view,removeBtn)
+        }
+
         return binding.root
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_add, container, false)
@@ -103,24 +109,28 @@ class AddFragment: Fragment() {
 
     private fun clickHandlerFunction( view:View, btn:Button)
     {
+        val btnText = btn.text.toString()
+        //for Done button
+        if(btnText =="DONE")
+        {
+            val currentScore = 10
+            val action = AddFragmentDirections.actionAddFragmentToScheduleFragment(currentScore)
 
-//        val myClass1 = viewModel.chosenClasses[0]
-//        Log.i("AddFragment", "Class1 Name: $myClass1")
-//        if(viewModel.chosenClasses.size > 1)
-//        {
-//            val myClass2 = viewModel.chosenClasses[1]
-//            Log.i("AddFragment", "Class2 Name: $myClass2")
-//        }
-//
-//        for(item in viewModel.chosenClassObjects)
-//        {
-//            Log.i("AddFragment","${item.className}")
-//        }
-//        Toast.makeText(activity, "Added Class: $myClass1",Toast.LENGTH_SHORT).show()
-        val currentScore = 10
-        val action = AddFragmentDirections.actionAddFragmentToScheduleFragment(currentScore)
+            //view.findNavController().navigate(R.id.action_scheduleFragment_to_addFragment)
+            view.findNavController().navigate(action)
+        }
 
-        //view.findNavController().navigate(R.id.action_scheduleFragment_to_addFragment)
-        view.findNavController().navigate(action)
+        //for Edit button
+        else if(btnText == "EDIT")
+        {
+            val action = AddFragmentDirections.actionAddFragmentToRemoveFragment()
+            view.findNavController().navigate(action)
+        }
+
+        else
+        {
+            Log.i("Add Fragment","Click Handler Function has error.Fix it")
+        }
+
     }
 }

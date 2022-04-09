@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_addFragment_to_scheduleFragment"
             app:destination="@id/scheduleFragment" />
+        <action
+            android:id="@+id/action_addFragment_to_removeFragment"
+            app:destination="@id/removeFragment" />
     </fragment>
 
     <fragment
@@ -34,6 +37,15 @@
         <action
             android:id="@+id/action_scheduleFragment_to_addFragment"
             app:destination="@id/addFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/removeFragment"
+        android:name="com.example.timetableapp.RemoveFragment"
+        android:label="RemoveFragment"
+        tools:layout="@layout/fragment_remove" >
+        <action
+            android:id="@+id/action_removeFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment" />
     </fragment>
 
 </navigation>
