@@ -155,28 +155,46 @@ class ItemViewModel:ViewModel() {
      */
     fun removeClass(className:String)
     {
-        if(chosenClasses.contains(className))
+        if(chosenClasses.size > 0)
         {
-            chosenClasses.remove(className)
-            //Remove from the ChosenObects too
-            removeFromChosenObjects(className)
-            removalSuccess = true
+            val contains:Boolean = chosenClasses.contains(className)
+            if(contains)
+            {
+                chosenClasses.remove(className)
+                //Remove from the ChosenObects too
+                removeFromChosenObjects(className)
+                removalSuccess = true
+            }
+
+            else
+            {
+                removalSuccess = false
+            }
         }
 
         else
         {
             removalSuccess = false
         }
+
     }
 
     private fun removeFromChosenObjects(className: String)
     {
+        var objectForRemoval: MyClass? = null
+        var removeObject:Boolean = false
         for(item in chosenClassObjects)
         {
-            if(item.csciName == className)
+            if(chosenClassObjects.size > 0 && item.csciName == className)
             {
-                chosenClassObjects.remove(item)
+                objectForRemoval = item
+                removeObject = true
             }
+        }
+
+        if(removeObject)
+        {
+            chosenClassObjects.remove(objectForRemoval)
         }
     }
 
