@@ -16,6 +16,7 @@ class ItemViewModel:ViewModel() {
     var chosenClassObjects:MutableList<MyClass> = mutableListOf<MyClass>()
 
     var addSuccess:Boolean = true
+    var removalSuccess:Boolean = true
 
 
     fun setData(item:String)
@@ -147,6 +148,36 @@ class ItemViewModel:ViewModel() {
             }
         }
         return result
+    }
+
+    /**
+     * This function removes class if it already present in the chosenClass and also removes from the ChosenObjects if present
+     */
+    fun removeClass(className:String)
+    {
+        if(chosenClasses.contains(className))
+        {
+            chosenClasses.remove(className)
+            //Remove from the ChosenObects too
+            removeFromChosenObjects(className)
+            removalSuccess = true
+        }
+
+        else
+        {
+            removalSuccess = false
+        }
+    }
+
+    private fun removeFromChosenObjects(className: String)
+    {
+        for(item in chosenClassObjects)
+        {
+            if(item.csciName == className)
+            {
+                chosenClassObjects.remove(item)
+            }
+        }
     }
 
 
